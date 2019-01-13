@@ -1,0 +1,18 @@
+Создание базы mysql:
+  mysql -u root -p
+  CREATE USER "storer"@"localhost" IDENTIFIED BY "storepass";
+  CREATE DATABASE store DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+  GRANT ALL PRIVILEGES ON store.* TO "storer"@"localhost";
+  FLUSH PRIVILEGES;
+Подключение параметров базы в .env
+Первая миграция:
+  php artisan config:cache
+  php artisan migrate
+Подключение авторизации:
+  php artisan make:auth
+  php artisan migrate
+Adminer:
+  Скачать файл adminer.php
+  Сохранить его в store/public
+Обновление таблиц при изменении в миграциях (при этом таблица теряет все данные!):
+  php artisan migrate:refrash
