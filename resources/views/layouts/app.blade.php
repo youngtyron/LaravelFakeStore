@@ -12,6 +12,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href="{{ asset('css/store.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div id="app">
@@ -31,6 +34,14 @@
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
+                    @guest
+                    @else
+                      @if (Auth::user()->is_admin)
+                        <a class="navbar-brand" href="{{ route('adminpanel') }}">
+                            Admin
+                        </a>
+                      @endif
+                    @endguest
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">

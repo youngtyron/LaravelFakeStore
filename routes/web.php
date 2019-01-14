@@ -20,3 +20,12 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/catalog', 'CategoryController', ['as'=>'catalog']);
+
+Route::resource('/api_catalog', 'CategoryAPIController');
+
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function()
+{
+  Route::get('/', 'Admin\AdminController@show')->name('adminpanel');
+  Route::get('/categories', 'CategoryController@adminshow')->name('admin.categories');
+  Route::resource('/category', 'CategoryController', ['as'=>'admin']);
+});

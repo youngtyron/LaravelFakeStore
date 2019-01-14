@@ -16,11 +16,10 @@
 
                     You are logged in!
 
-                    @if (Auth::user()->is_admin)
-                      <p>Admin</p>
-                    @else
-                      <p>Client</p>
-                    @endif
+                    <div class="links">
+                      <a href="{{ url('/catalog') }}">Каталог</a>
+                    </div>
+
 
 
                 </div>

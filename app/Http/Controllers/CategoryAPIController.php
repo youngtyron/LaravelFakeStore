@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CategoryAPIController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,21 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-      return view('catalog.categories.index', [
-        'categories'=>Category::paginate()
-      ]);
-      // $categories = Category::paginate();
-      // return $categories->toArray();
-      // echo 'index method';
-    }
-    public function adminshow()
-    {
-      return view('admin.categories.categories', [
-        'categories'=>Category::paginate()
-      ]);
-      // $categories = Category::paginate();
-      // return $categories->toArray();
-      // echo 'index method';
+      $categories = Category::paginate();
+      return $categories->toArray();
     }
 
     /**
@@ -38,9 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-      return view('admin.categories.create',[
-        'category'=>[],
-      ]);
+        //
     }
 
     /**
@@ -51,9 +36,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // echo $request;
-        Category::create($request->all());
-        return redirect()->route('admin.categories');
+        //
     }
 
     /**
@@ -75,9 +58,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-      return view('admin.categories.edit',[
-        'category'=>$category
-      ]);
+        //
     }
 
     /**
@@ -89,10 +70,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-      $category->name = $request['name'];
-      $category->image = $request['image'];
-      $category->save();
-      return redirect()->route('admin.categories');
+        //
     }
 
     /**
