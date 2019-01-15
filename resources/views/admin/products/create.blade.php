@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="row" style="margin-top:50px;">
-    <form class="form-horizontal" action="{{route('admin.category.store')}}" method="post">
+    <form class="form-horizontal" action="{{route('admin.products.store')}}" method="post">
       {{ csrf_field() }}
 
       {{-- Form include --}}

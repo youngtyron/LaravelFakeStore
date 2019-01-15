@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
       return view('catalog.categories.index', [
-        'categories'=>Category::paginate()
+        'categories'=>Category::with('children')->where('parent_id','0')->get(),
       ]);
       // $categories = Category::paginate();
       // return $categories->toArray();
@@ -24,7 +24,8 @@ class CategoryController extends Controller
     public function adminshow()
     {
       return view('admin.categories.categories', [
-        'categories'=>Category::paginate()
+        'categories'=>Category::with('children')->where('parent_id','0')->get(),
+        'delimiter'=>''
       ]);
       // $categories = Category::paginate();
       // return $categories->toArray();
@@ -40,6 +41,8 @@ class CategoryController extends Controller
     {
       return view('admin.categories.create',[
         'category'=>[],
+        'categories'=>Category::with('children')->where('parent_id','0')->get(),
+        'delimiter'=>''
       ]);
     }
 
@@ -64,7 +67,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+      return view('catalog.categories.show');
     }
 
     /**
@@ -76,7 +79,9 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
       return view('admin.categories.edit',[
-        'category'=>$category
+        'category'=>$category,
+        'categories'=>Category::with('children')->where('parent_id','0')->get(),
+        'delimiter'=>''
       ]);
     }
 
@@ -91,6 +96,7 @@ class CategoryController extends Controller
     {
       $category->name = $request['name'];
       $category->image = $request['image'];
+      $category->parent_id = $request['parent_id'];
       $category->save();
       return redirect()->route('admin.categories');
     }

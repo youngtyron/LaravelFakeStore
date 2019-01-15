@@ -1,7 +1,14 @@
-
     <div class="form-group">
       <label for="">Название</label>
       <input type="text" class="form-control" name="name" placeholder="Заголовок категории" value="{{$category->name or ""}}" required>
+    </div>
+
+    <div class="form-group">
+    <label for="">Родительская категория</label>
+      <select class="form-control" name="parent_id">
+        <option value="0">-- без родительской категории --</option>
+        @include('admin.categories.units.option_categories', ['categories' => $categories])
+      </select>
     </div>
 
     <div class="form-group">
@@ -15,15 +22,5 @@
     </div>
 
     <hr />
-<!-- 
-    <h4 class="text-center">Параметры товаров</h4>
-
-    <div class="form-inline">
-        <label for="">Параметр 1</label>
-        <input type="text" class="form-control" name="1" placeholder="" value="" required>
-
-        <button type="button" class="btn btn-success">Добавить значение</button>
-
-    </div> -->
 
     <input class="btn btn-info" type="submit" value="Сохранить">

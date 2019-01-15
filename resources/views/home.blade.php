@@ -17,7 +17,8 @@
                     You are logged in!
 
                     <div class="links">
-                      <a href="{{ url('/catalog') }}">Каталог</a>
+                      <!-- <a href="{{ url('/catalog') }}">Каталог</a> -->
+                      <a href="{{route('catalog.index')}}">Каталог</a>
                     </div>
 
 

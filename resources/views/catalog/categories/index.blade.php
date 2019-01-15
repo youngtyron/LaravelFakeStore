@@ -4,14 +4,18 @@
 <div class="container">
     <div class="row">
 
-      <!-- @foreach ($categories as $category)
-        <p>{{$category->name}}</p>
-      @endforeach -->
+      @foreach ($categories as $category)
+        @if(count($category->children)>0)
+          <p><a href="{{route('catalog.show', $category)}}">{{$category->name}}</a></p>
+        @else
+          <p><a href="{{route('catalog.products_category', $category->id)}}">{{$category->name}}</a></p>
+        @endif
+      @endforeach
 
-      <div class="col categories-box">
+      <!-- <div class="col categories-box">
         <table class="categories-table table">
         </table>
-      </div>
+      </div> -->
 
     </div>
 </div>
