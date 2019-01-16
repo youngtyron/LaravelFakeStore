@@ -14,7 +14,7 @@ Route::group(['prefix' => 'catalog', 'as'=>'catalog.'], function()
   // Route::resource('/', 'CategoryController')->only([
   //   'index', 'show']);
   Route::get('/', 'CategoryController@index')->name('index');
-  Route::get('/{id}', 'CategoryController@show')->name('show');
+  Route::get('/{category}', 'CategoryController@show')->name('show');
   Route::get('/{id}/products', 'ProductController@index_category')->name('products_category');
 });
 

@@ -12,11 +12,6 @@
         @endif
       @endforeach
 
-      <!-- <div class="col categories-box">
-        <table class="categories-table table">
-        </table>
-      </div> -->
-
     </div>
 </div>
 @endsection

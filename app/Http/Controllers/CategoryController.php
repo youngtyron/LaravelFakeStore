@@ -20,8 +20,11 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-      return view('catalog.categories.show');
-    }
+        return view('catalog.categories.show',[
+          'categories'=>Category::where('parent_id', $category->id)->get(),
+        ]);
+        // echo $category;
+      }
 
     public function destroy(Category $category)
     {
