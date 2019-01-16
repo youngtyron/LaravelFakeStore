@@ -17,7 +17,7 @@
            <p class="text-center">Данные отсутствуют</p>
        @endforelse
            <a class="btn btn-info" href="{{route('admin.category.create')}}">Добавить категорию <i class="fa fa-plus"></i></a>
-           <a class="btn btn-success" href="{{route('admin.products.create')}}">Добавить товар <i class="fa fa-plus"></i></a>
+           <a class="btn btn-success" href="{{route('admin.product.create')}}">Добавить товар <i class="fa fa-plus"></i></a>
 
 
 

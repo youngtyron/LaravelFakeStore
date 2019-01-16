@@ -29,10 +29,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view('admin.products.create');
-    }
+    // public function create()
+    // {
+    //     return view('admin.products.create');
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -40,10 +40,6 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.

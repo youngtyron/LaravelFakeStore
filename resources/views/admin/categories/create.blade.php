@@ -8,7 +8,7 @@
       {{ csrf_field() }}
 
       {{-- Form include --}}
-      @include('admin.products.units.form')
+      @include('admin.categories.units.form')
 
     </form>
   </div>
