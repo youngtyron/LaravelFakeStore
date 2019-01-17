@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
 use App\Product;
+use App\ProductImage;
 use DB;
+// use Illuminate\Support\Facades\Storage;
 
 
 
@@ -66,7 +68,23 @@ class AdminController extends Controller
   }
   public function store_product(Request $request)
   {
-    Product::create($request->all());
+    $product=Product::create($request->all());
+    $general= $request->file('general-image');
+    $path = $general->store('uploads', 'public');
+    ProductImage::create([
+               'image' => $path,
+               'product_id' => $product->id]);
+    $product->image = $path;
+    $product->save();
+    $images = $request->file('other-images');
+    if (!empty($images)){
+      foreach ($images as $image){
+        $path = $image->store('uploads', 'public');
+        ProductImage::create([
+                   'image' => $path,
+                   'product_id' => $product->id]);
+      }
+    }
     return redirect()->route('admin.categories');
   }
 

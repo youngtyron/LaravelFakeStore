@@ -1,11 +1,15 @@
-// $(document).on('click', '.edit-category-name', function(){
-//
-// });
-
 function openCategoryNameEditor($this) {
-  // var namecell = $('.category-name').find('[name=$id]');
   var namecell = $($this).parent().parent().find('.category-name');
   $(namecell).find('.category-name-p').css('display', 'none');
   $(namecell).find('form').css('display', 'block');
-  console.log(namecell)
+}
+
+function ChangeOtherImagesInputProduct() {
+  var input = document.getElementById('other-images-input');
+  var files = input.files;
+  var arr = new Array();
+  for(var i=0;i<files.length;i++){
+    arr.push(files[i]);
+  }
+  $(input).attr('value', arr);
 }

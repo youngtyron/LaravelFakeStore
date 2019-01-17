@@ -41,6 +41,16 @@
   <input class="form-control" type="text" name="assortment" placeholder="Количество товара" value="{{$product->assortment or ""}}" required="">
 </div>
 
+<div class="form-group">
+    <label for="">Титульное фото товара</label>
+    <input id="general-image-input" type="file" name="general-image">
+</div>
+
+<div class="form-group">
+    <label for="">Другие фото</label>
+    <input id="other-images-input" type="file" multiple name="other-images[]" onchange="ChangeOtherImagesInputProduct()">
+</div>
+
 <hr />
 
 <input class="btn btn-info" type="submit" value="Сохранить">

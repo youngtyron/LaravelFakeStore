@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="row" style="margin-top:50px;">
-    <form class="form-horizontal" action="{{route('admin.product.store')}}" method="post">
+    <form class="form-horizontal" action="{{route('admin.product.store')}}" method="post" enctype="multipart/form-data">
       {{ csrf_field() }}
 
       {{-- Form include --}}
@@ -14,3 +14,5 @@
   </div>
 </div>
 @endsection
+
+<script src="{{ asset('js/admin.js') }}"></script>

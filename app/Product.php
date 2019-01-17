@@ -6,12 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-  protected $fillable = ['model', 'brand', 'assortment', 'category_id', 'price', 'characteristic', 'summary', 'color'];
+  protected $fillable = ['model', 'brand', 'assortment', 'category_id', 'price', 'characteristic', 'summary', 'color', 'image'];
 
   public $timestamps = false;
 
   public function category()
   {
     return $this->belongsTo('App\Category', 'category_id');
+  }
+  public function images(){
+    return $this->hasMany('App\ProductImage');
   }
 }

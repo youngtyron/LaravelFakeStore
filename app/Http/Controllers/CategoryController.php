@@ -15,15 +15,13 @@ class CategoryController extends Controller
       ]);
       // $categories = Category::paginate();
       // return $categories->toArray();
-      // echo 'index method';
     }
 
     public function show(Category $category)
     {
-        return view('catalog.categories.show',[
+        return view('catalog.categories.index',[
           'categories'=>Category::where('parent_id', $category->id)->get(),
         ]);
-        // echo $category;
       }
 
     public function destroy(Category $category)
