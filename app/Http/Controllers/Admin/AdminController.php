@@ -30,7 +30,7 @@ class AdminController extends Controller
     return view('admin.categories.create',[
       'category'=>[],
       'categories'=>Category::with('children')->where('parent_id','0')->get(),
-      'delimiter'=>''
+      'delimiter'=>'' 
     ]);
   }
   public function edit_category(Category $category)

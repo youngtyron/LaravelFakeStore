@@ -7,3 +7,21 @@
     text-decoration: none;
     text-transform: uppercase;
 }
+.in-stock{
+  color: green;
+}
+.out-of-stock{
+  color: red;
+}
+.title-image{
+  height: 100px;
+  width: auto;
+  border: 1px;
+}
+.title-image-div{
+  height: 150px;
+  width: 150px;
+}
+.title-image-p{
+  text-align: center;
+}

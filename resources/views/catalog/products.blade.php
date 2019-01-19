@@ -3,13 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row">
+      <div class="links">
+        <p id="category-id" name="{{$category_id}}"></p>
+        <table class='products-table'>
 
-      @foreach($products as $product)
-        <p>{{$product->brand}} {{$product->model}}</p>
-          @if($product->image)
-              <img src="{{asset ('/storage/'.$product->image)}}" alt="{{$product->image}}">
-          @endif
-      @endforeach
+        </table>
+      </div>
+
 
     </div>
 </div>

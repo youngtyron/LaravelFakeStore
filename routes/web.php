@@ -16,12 +16,21 @@ Route::group(['prefix' => 'catalog', 'as'=>'catalog.'], function()
   Route::get('/', 'CategoryController@index')->name('index');
   Route::get('/{category}', 'CategoryController@show')->name('show');
   Route::get('/{id}/products', 'ProductController@index_category')->name('products_category');
+  Route::get('/product/{product}', 'ProductController@show')->name('product.show');
+  Route::get('/product/{product}/edit', 'ProductController@edit')->name('product.edit');
+  Route::put('/product/{product}/update', 'ProductController@update')->name('product.update');
+
 });
+Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
+{
+  Route::get('/products', 'ProductAPIController@index')->name('api.products');
+});
+
 
 Route::resource('/api_catalog', 'CategoryAPIController');
 
-Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function()
-{
+
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
   Route::get('/', 'Admin\AdminController@show')->name('adminpanel');
   Route::get('/categories', 'Admin\AdminController@categories')->name('admin.categories');
   Route::get('/categories/create', 'Admin\AdminController@create_category')->name('admin.category.create');

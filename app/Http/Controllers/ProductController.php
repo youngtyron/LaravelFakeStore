@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Category;
+use App\ProductImage;
 use DB;
 use Illuminate\Http\Request;
 
@@ -21,17 +22,56 @@ class ProductController extends Controller
     public function index_category($id)
     {
       return view('catalog.products', [
-        'products'=>DB::table('products')->where('category_id', $id)->get(),
+        // 'products'=>DB::table('products')->where('category_id', $id)->get(),
+        'category_id'=>$id
       ]);
     }
 
     public function show(Product $product)
     {
-        //
+        return view('catalog.products.show', [
+          'product'=>Product::find($product->id)
+        ]);
     }
 
     public function destroy(Product $product)
     {
         //
+    }
+    public function edit(Product $product)
+    {
+        return view('catalog.products.edit', [
+          'product'=>Product::find($product->id),
+          'categories'=>Category::where('is_last', '1')->get()
+        ]);
+    }
+    public function update(Request $request, Product $product)
+    {
+      // print_r($_FILES);
+      $product->brand = $request['brand'];
+      $product->model = $request['model'];
+      $product->assortment = $request['assortment'];
+      $product->price = $request['price'];
+      $product->color = $request['color'];
+      $product->characteristic = $request['characteristic'];
+      $product->summary = $request['summary'];
+      $product->category_id = $request['category_id'];
+      $general= $request->file('general-image');
+      $path = $general->store('uploads', 'public');
+      ProductImage::create([
+                 'image' => $path,
+                 'product_id' => $product->id]);
+      $product->image = $path;
+      $images = $request->file('other-images');
+      if (!empty($images)){
+        foreach ($images as $image){
+          $path = $image->store('uploads', 'public');
+          ProductImage::create([
+                     'image' => $path,
+                     'product_id' => $product->id]);
+        }
+      }
+      $product->save();
+      return redirect()->route('admin.categories');
     }
 }

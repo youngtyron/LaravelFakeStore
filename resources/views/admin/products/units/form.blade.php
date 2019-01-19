@@ -11,7 +11,7 @@
 <div class="form-group">
 <label for="">Категория</label>
   <select class="form-control" name="category_id">
-    <option disabled selected value>Выберите категорию из каталога</option>
+    <!-- <option disabled selected value>Выберите категорию из каталога</option> -->
     @include('admin.products.units.option_categories', ['categories' => $categories])
   </select>
 </div>
