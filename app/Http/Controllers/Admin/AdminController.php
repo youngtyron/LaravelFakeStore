@@ -30,7 +30,7 @@ class AdminController extends Controller
     return view('admin.categories.create',[
       'category'=>[],
       'categories'=>Category::with('children')->where('parent_id','0')->get(),
-      'delimiter'=>'' 
+      'delimiter'=>''
     ]);
   }
   public function edit_category(Category $category)
@@ -68,7 +68,16 @@ class AdminController extends Controller
   }
   public function store_product(Request $request)
   {
-    $product=Product::create($request->all());
+    $product=Product::create([
+      'brand' => $request['brand'],
+      'model' => $request['model'],
+      'assortment' => $request['assortment'],
+      'price' => $request['price'],
+      'color' => $request['color'],
+      'characteristic' => $request['characteristic'],
+      'summary' => $request['summary'],
+      'category_id' => $request['category_id']
+    ]);
     $general= $request->file('general-image');
     $path = $general->store('uploads', 'public');
     ProductImage::create([
@@ -86,6 +95,7 @@ class AdminController extends Controller
       }
     }
     return redirect()->route('admin.categories');
+    // print_r($request);
   }
 
 }

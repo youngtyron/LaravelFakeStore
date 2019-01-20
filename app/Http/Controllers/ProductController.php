@@ -22,7 +22,6 @@ class ProductController extends Controller
     public function index_category($id)
     {
       return view('catalog.products', [
-        // 'products'=>DB::table('products')->where('category_id', $id)->get(),
         'category_id'=>$id
       ]);
     }
@@ -47,7 +46,8 @@ class ProductController extends Controller
     }
     public function update(Request $request, Product $product)
     {
-      // print_r($_FILES);
+      $general= $request->file('general-image');
+      $path = $general->store('uploads', 'public');
       $product->brand = $request['brand'];
       $product->model = $request['model'];
       $product->assortment = $request['assortment'];
@@ -56,8 +56,6 @@ class ProductController extends Controller
       $product->characteristic = $request['characteristic'];
       $product->summary = $request['summary'];
       $product->category_id = $request['category_id'];
-      $general= $request->file('general-image');
-      $path = $general->store('uploads', 'public');
       ProductImage::create([
                  'image' => $path,
                  'product_id' => $product->id]);

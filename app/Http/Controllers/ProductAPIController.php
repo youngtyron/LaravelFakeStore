@@ -18,8 +18,10 @@ class ProductAPIController extends Controller
     public function index()
     {
       $id = Input:: Get('id');
-      $products = Product::where('category_id', $id)->paginate();
-      return $products->toArray();
+      // $products = Product::where('category_id', $id)->get()->splice(0, 16);
+      $products = DB::table('products')->where('category_id', $id)->orderBy('price', 'DESC')->get();
+      $splice = $products->splice(0, 16);
+      return $splice->toArray();
     }
 
 }

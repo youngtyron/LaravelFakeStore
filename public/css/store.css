@@ -14,14 +14,34 @@
   color: red;
 }
 .title-image{
-  height: 100px;
+  height: 150px;
   width: auto;
   border: 1px;
 }
 .title-image-div{
-  height: 150px;
-  width: 150px;
+  margin-top: 10px;
+  height: 200px;
+  width: 200px;
+  margin: auto;
 }
 .title-image-p{
   text-align: center;
+}
+.divbox{
+  width: 300px;
+}
+.product-brand{
+  text-align: center;
+}
+.product-model{
+  text-align: center;
+}
+.product-link{
+  color: #636b6f;
+  padding: 0 25px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: .1rem;
+  text-decoration: none;
+  text-transform: uppercase;
 }
