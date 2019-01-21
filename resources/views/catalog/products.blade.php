@@ -3,11 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row">
-      <div class="links">
-        <p id="category-id" name="{{$category_id}}"></p>
-        <table class='products-table'>
-        </table>
-      </div>
+        <div class="links">
+          <p id="category-id" name="{{$category_id}}"></p>
+          <table class='products-table'>
+          </table>
+        </div>
     </div>
 </div>
 @endsection

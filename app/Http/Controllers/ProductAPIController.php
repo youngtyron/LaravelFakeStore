@@ -17,11 +17,19 @@ class ProductAPIController extends Controller
      */
     public function index()
     {
-      $id = Input:: Get('id');
-      // $products = Product::where('category_id', $id)->get()->splice(0, 16);
-      $products = DB::table('products')->where('category_id', $id)->orderBy('price', 'DESC')->get();
-      $splice = $products->splice(0, 16);
-      return $splice->toArray();
+      $lastprice = Input:: Get('price');
+      if ($lastprice){
+        $id = Input:: Get('id');
+        $products = DB::table('products')->where('category_id', $id)->where('price', '<', $lastprice)->orderBy('price', 'DESC')->get();
+        $splice = $products->splice(0, 12);
+        return $splice->toArray();
+      }
+      else{
+        $id = Input:: Get('id');
+        $products = DB::table('products')->where('category_id', $id)->orderBy('price', 'DESC')->get();
+        $splice = $products->splice(0, 12);
+        return $splice->toArray();
+      }
     }
 
 }
