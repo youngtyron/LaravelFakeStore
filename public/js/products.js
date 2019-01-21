@@ -17,7 +17,7 @@ function ProductsRequest() {
         products = response;
         if (products != ''){
           if ($('.products-table-row').last().find('.divbox').length ==0){
-            var counter = 4;
+            var counter = 3;
           }
           else{
             var counter = $('.products-table-row').last().find('.divbox').length;
@@ -26,7 +26,7 @@ function ProductsRequest() {
             product = products[i];
             if ($.inArray(product.id, array)==-1){
               array.push(product.id);
-              if (counter < 4){
+              if (counter < 3){
                 var tablerow  = $('#in-work-table-row');
                 var cell = $('<td>', { class: 'products-table-cell', id: 'in-work-table-cell'}).appendTo(tablerow);
                 cell.append(divbox);
@@ -66,7 +66,12 @@ function ProductsRequest() {
               };
             };
           };
-        };
+        }
+        else{
+          if ($('.divbox').length == 0){
+            $('.no-products').show();
+          }
+        }
       },
     });
 }

@@ -1,6 +1,15 @@
+.app-col{
+
+}
+.app-container{
+
+}
+.app-row{
+
+}
 .links > a {
     color: #636b6f;
-    padding: 0 25px;
+    /* padding: 0 25px; */
     font-size: 12px;
     font-weight: 600;
     letter-spacing: .1rem;
@@ -14,34 +23,53 @@
   color: red;
 }
 .title-image{
-  height: 150px;
+  height: 100px;
   width: auto;
   border: 1px;
 }
 .title-image-div{
   margin-top: 10px;
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
   margin: auto;
 }
 .title-image-p{
   text-align: center;
 }
 .divbox{
-  width: 300px;
+  width: 200px;
 }
 .product-brand{
   text-align: center;
+  font-size: 15px;
 }
 .product-model{
   text-align: center;
+  font-size: 12px;
+}
+.product-price{
+  text-align: center;
+  font-size: 12px;
 }
 .product-link{
   color: #636b6f;
   padding: 0 25px;
-  font-size: 15px;
+  /* font-size: 15px; */
   font-weight: 600;
   letter-spacing: .1rem;
   text-decoration: none;
   text-transform: uppercase;
+}
+.left-catalog-elem{
+  display: none;
+  opacity: 1;
+  z-index: 50;
+}
+.left-catalog-box{
+  position: fixed;
+  opacity: 1;
+  z-index: 50;
+}
+.fa-angle-right{
+  margin-right: 0px;
 }
