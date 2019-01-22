@@ -86,6 +86,9 @@
             <div class="col-xs-4 col-sm-2 app-col leftpanel">
               @include('catalog.leftblock.leftpanel')
             </div>
+            <!-- <div class="col-sm-3 col-md-2 sidebar leftpanel">
+              @include('catalog.leftblock.leftpanel')
+            </div> -->
             <div class="col-xs-12 col-sm-8 app-col">
               @yield('content')
             </div>

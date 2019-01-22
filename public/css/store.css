@@ -61,15 +61,19 @@
   text-transform: uppercase;
 }
 .left-catalog-elem{
-  display: none;
+  /* display: none; */
   opacity: 1;
   z-index: 50;
+  list-style-type: none;
 }
 .left-catalog-box{
-  position: fixed;
+  display: none;
   opacity: 1;
   z-index: 50;
 }
 .fa-angle-right{
   margin-right: 0px;
+}
+.left-catalog-header{
+  background-color: pink;
 }

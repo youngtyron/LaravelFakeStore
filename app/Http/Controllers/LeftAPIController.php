@@ -9,7 +9,18 @@ class LeftAPIController extends Controller
 {
     public function leftblock()
     {
-        $categories = Category::with('children')->where('parent_id','0')->get();
+        $categories = Category::all();
+        foreach ($categories as $category) {
+          if ($category->is_last==0){
+            $children = $category->children;
+            foreach ($children as $child) {
+              if ($child->is_last==0){
+                $obj = Category::where('parent_id', $child->id)->get();
+                $child->children=$obj;
+              }
+            }
+          }
+        }
         return $categories->toArray();
     }
 }
