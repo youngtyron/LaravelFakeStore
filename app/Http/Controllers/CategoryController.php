@@ -13,8 +13,6 @@ class CategoryController extends Controller
       return view('catalog.categories.index', [
         'categories'=>Category::with('children')->where('parent_id','0')->get(),
       ]);
-      // $categories = Category::paginate();
-      // return $categories->toArray();
     }
 
     public function show(Category $category)
@@ -28,4 +26,5 @@ class CategoryController extends Controller
     {
         //
     }
+
 }

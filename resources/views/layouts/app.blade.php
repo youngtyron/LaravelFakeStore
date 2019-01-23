@@ -83,19 +83,25 @@
         </nav>
         <div class="container app-container">
           <div class="row app-row">
-            <div class="col-xs-4 col-sm-2 app-col leftpanel">
-              @include('catalog.leftblock.leftpanel')
-            </div>
-            <!-- <div class="col-sm-3 col-md-2 sidebar leftpanel">
-              @include('catalog.leftblock.leftpanel')
-            </div> -->
+            @if (Auth::check())
+              <div class="col-xs-4 col-sm-2 app-col leftpanel">
+                @include('catalog.leftblock.leftpanel')
+              </div>
+            @endif
             <div class="col-xs-12 col-sm-8 app-col">
               @yield('content')
             </div>
-            <div class="col-xs-4 col-sm-2 app-col">
-              @yield('right')
-            </div>
-
+            @if (Auth::check())
+              @if (Auth::user()->is_admin)
+                <div class="col-xs-4 col-sm-2 app-col">
+                  @include('admin.rightblock')
+                </div>
+              @else
+                <div class="col-xs-4 col-sm-2 app-col">
+                  RIGHTBLOCK
+                </div>
+              @endif
+            @endif
           </div>
 
         </div>
