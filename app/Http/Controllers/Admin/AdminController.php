@@ -8,6 +8,8 @@ use App\Category;
 use App\Product;
 use App\ProductImage;
 use DB;
+use \Cache;
+
 // use Illuminate\Support\Facades\Storage;
 
 
@@ -49,6 +51,7 @@ class AdminController extends Controller
         $parent->is_last = false;
         $parent->save();
       }
+      Cache::forget('allcategories');
       return redirect()->route('admin.categories');
   }
   public function update_category(Request $request, Category $category)
@@ -59,6 +62,7 @@ class AdminController extends Controller
     $category->save();
     return redirect()->route('admin.categories');
   }
+  Cache::forget('allcategories');
   public function create_product()
   {
       return view('admin.products.create',[
@@ -95,7 +99,6 @@ class AdminController extends Controller
       }
     }
     return redirect()->route('admin.categories');
-    // print_r($request);
   }
 
 }

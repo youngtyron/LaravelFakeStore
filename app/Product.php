@@ -17,4 +17,8 @@ class Product extends Model
   public function images(){
     return $this->hasMany('App\ProductImage');
   }
+  public function bookings()
+  {
+    return $this->belongsToMany('App\Booking');
+  }
 }

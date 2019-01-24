@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="links">
-    <p id="category-id" name="{{$category_id}}"></p>
+    <p id="category-id" name="{{$idkey}}"></p>
     <table class='products-table'>
       <p class='no-products' style='display: none;'>Здесь пока нет товаров</p>
     </table>

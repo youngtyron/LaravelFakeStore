@@ -7,6 +7,8 @@ use App\Category;
 use App\ProductImage;
 use DB;
 use Illuminate\Http\Request;
+use \Cache;
+
 
 class ProductController extends Controller
 {
@@ -22,7 +24,10 @@ class ProductController extends Controller
     public function index_category($id)
     {
       return view('catalog.products', [
-        'category_id'=>$id
+        'idkey'=>$id,
+        'categories' =>Cache::rememberForever('allcategories', function() {
+             return Category::get_all_categories();
+            }),
       ]);
     }
 

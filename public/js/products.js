@@ -6,6 +6,7 @@ var price = "<p id='in-work-price' class='product-price'></p>"
 var products = '';
 var array = [];
 
+
 function ProductsRequest() {
     var id = parseInt($('#category-id').attr('name'));
     var lastprice = $('.product-price').last().attr('name');

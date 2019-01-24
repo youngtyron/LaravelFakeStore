@@ -17,6 +17,7 @@ class ProductAPIController extends Controller
      */
     public function index()
     {
+      // echo $request;
       $lastprice = Input:: Get('price');
       if ($lastprice){
         $id = Input:: Get('id');
