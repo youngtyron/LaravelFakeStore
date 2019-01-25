@@ -34,7 +34,10 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         return view('catalog.products.show', [
-          'product'=>Product::find($product->id)
+          'product'=>Product::find($product->id),
+          'categories' =>Cache::rememberForever('allcategories', function() {
+               return Category::get_all_categories();
+              }),
         ]);
     }
 

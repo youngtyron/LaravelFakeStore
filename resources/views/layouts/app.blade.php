@@ -98,7 +98,7 @@
                 </div>
               @else
                 <div class="col-xs-4 col-sm-2 app-col">
-                  RIGHTBLOCK
+                  @include('basket.rightblock')
                 </div>
               @endif
             @endif

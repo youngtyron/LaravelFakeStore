@@ -25,6 +25,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
 {
   Route::get('/products', 'ProductAPIController@index')->name('api.products');
   Route::get('/leftblock', 'LeftAPIController@leftblock')->name('api.leftblock');
+  Route::post('/to_basket', 'BasketController@add');
 });
 
 

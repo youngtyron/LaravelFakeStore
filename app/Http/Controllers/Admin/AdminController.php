@@ -60,9 +60,9 @@ class AdminController extends Controller
     $category->image = $request['image'];
     $category->parent_id = $request['parent_id'];
     $category->save();
+    Cache::forget('allcategories');
     return redirect()->route('admin.categories');
   }
-  Cache::forget('allcategories');
   public function create_product()
   {
       return view('admin.products.create',[
