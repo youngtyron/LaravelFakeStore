@@ -15,6 +15,6 @@ class BasketController extends Controller
         $product_id = $request['id'];
         $product = Product::find($product_id);
         $basket->products()->save($product);
-        echo 'hello';
+        return count($basket->products);
     }
 }

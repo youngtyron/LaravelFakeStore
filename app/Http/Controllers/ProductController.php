@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Category;
 use App\ProductImage;
-use DB;
 use Illuminate\Http\Request;
 use \Cache;
 

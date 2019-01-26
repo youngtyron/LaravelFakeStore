@@ -6,8 +6,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'catalog', 'as'=>'catalog.'], function()
 {
@@ -19,13 +19,15 @@ Route::group(['prefix' => 'catalog', 'as'=>'catalog.'], function()
   Route::get('/product/{product}', 'ProductController@show')->name('product.show');
   Route::get('/product/{product}/edit', 'ProductController@edit')->name('product.edit');
   Route::put('/product/{product}/update', 'ProductController@update')->name('product.update');
-
 });
+
+
 Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
 {
   Route::get('/products', 'ProductAPIController@index')->name('api.products');
   Route::get('/leftblock', 'LeftAPIController@leftblock')->name('api.leftblock');
   Route::post('/to_basket', 'BasketController@add');
+  Route::get('/to_basket', function(){echo 'hello';});
 });
 
 
