@@ -35,7 +35,7 @@ function ProductsRequest() {
                 $('#in-work-divbox').find('.product-model').html(product.model);
                 $('#in-work-divbox').append(image_elem);
                 $('#in-work-divbox').parent().attr('href',  'http://localhost:8000/catalog/product/'+product.id);
-                $('#in-work-image').attr('src', 'http://localhost:8000/storage/' + product.image);
+                $('#in-work-image').attr('src', 'http://localhost:8000/' + product.image);
                 $('#in-work-divbox').append(price);
                 $('#in-work-price').html(product.price + 'Р');
                 $('#in-work-price').attr('name', product.price);
@@ -55,7 +55,7 @@ function ProductsRequest() {
                 $('#in-work-divbox').find('.product-model').html(product.model);
                 $('#in-work-divbox').append(image_elem);
                 $('#in-work-divbox').parent().attr('href',  'http://localhost:8000/catalog/product/'+product.id);
-                $('#in-work-image').attr('src', 'http://localhost:8000/storage/' + product.image);
+                $('#in-work-image').attr('src', 'http://localhost:8000/' + product.image);
                 $('#in-work-divbox').append(price);
                 $('#in-work-price').html(product.price + 'Р');
                 $('#in-work-price').attr('name', product.price);

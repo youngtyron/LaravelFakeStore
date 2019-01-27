@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use App\Category;
+use App\Basket;
 use App\ProductImage;
 use Illuminate\Http\Request;
 use \Cache;
@@ -20,23 +21,29 @@ class ProductController extends Controller
     {
         //
     }
-    public function index_category($id)
+    public function index_category(Request $request, $id)
     {
+      $basket = $request->user()->basket;
       return view('catalog.products', [
         'idkey'=>$id,
         'categories' =>Cache::rememberForever('allcategories', function() {
              return Category::get_all_categories();
             }),
+        'num_in_basket'=> $basket->num_in_basket(),
+        'writeTovar' => $basket->writeTovar(),
       ]);
     }
 
-    public function show(Product $product)
+    public function show(Request $request, Product $product)
     {
+        $basket = $request->user()->basket;
         return view('catalog.products.show', [
           'product'=>Product::find($product->id),
           'categories' =>Cache::rememberForever('allcategories', function() {
                return Category::get_all_categories();
               }),
+          'num_in_basket'=> $basket->num_in_basket(),
+          'writeTovar' => $basket->writeTovar(),
         ]);
     }
 
@@ -66,7 +73,7 @@ class ProductController extends Controller
       ProductImage::create([
                  'image' => $path,
                  'product_id' => $product->id]);
-      $product->image = $path;
+      $product->image = 'storage/'.$path;
       $images = $request->file('other-images');
       if (!empty($images)){
         foreach ($images as $image){

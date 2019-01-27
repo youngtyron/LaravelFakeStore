@@ -10,17 +10,19 @@ function PutIntoBasket(){
     url: 'http://localhost:8000/api/to_basket/',
     data: {'id':id},
     success: function(response){
-      x = 2;
-      console.log('hello')
-      console.log(response)
-    },
-    error: function(error){
-      console.log('error')
-      console.log(error.responseJSON.message)
+      if (response.writeTovar==1){
+        $('.rightblock-basket-counter').html(String(response.num) + ' товар в корзине')
+      }
+      else  if (response.writeTovar==2){
+        $('.rightblock-basket-counter').html(String(response.num) + ' товара в корзине')
+      }
+      else {
+        $('.rightblock-basket-counter').html(String(response.num) + ' товаров в корзине')
+      }
+      alert('Товар добавлен в корзину');
     },
   });
   // return false;
 }
-
 
 $(document).on('click', '.buy-button', PutIntoBasket);

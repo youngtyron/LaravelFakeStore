@@ -87,7 +87,7 @@ class AdminController extends Controller
     ProductImage::create([
                'image' => $path,
                'product_id' => $product->id]);
-    $product->image = $path;
+    $product->image = 'storage/'.$path;
     $product->save();
     $images = $request->file('other-images');
     if (!empty($images)){

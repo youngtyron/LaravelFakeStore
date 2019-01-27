@@ -27,11 +27,15 @@ Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
   Route::get('/products', 'ProductAPIController@index')->name('api.products');
   Route::get('/leftblock', 'LeftAPIController@leftblock')->name('api.leftblock');
   Route::post('/to_basket', 'BasketController@add');
-  Route::get('/to_basket', function(){echo 'hello';});
 });
 
 
 Route::resource('/api_catalog', 'CategoryAPIController');
+
+Route::group(['prefix' => 'basket', 'as'=>'basket.'], function()
+{
+  Route::get('/', 'BasketController@show')->name('show');
+});
 
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
@@ -43,7 +47,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
   Route::put('/categories/{category}/update', 'Admin\AdminController@update_category')->name('admin.category.update');
   Route::get('/products/create', 'Admin\AdminController@create_product')->name('admin.product.create');
   Route::post('/products/store', 'Admin\AdminController@store_product')->name('admin.product.store');
-
-
   // Route::resource('/products', 'ProductController', ['as'=>'admin']);
 });
