@@ -100,8 +100,11 @@
 .children-left-li{
   display: none;
 }
-.basket-image{ 
+.basket-image{
   height: 70px;
   width: auto;
   border: 1px;
+}
+.search-form{
+  text-align: center;
 }

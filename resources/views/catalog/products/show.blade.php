@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@include('search.form')
 
     {{ csrf_field() }}
 

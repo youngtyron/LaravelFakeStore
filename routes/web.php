@@ -13,6 +13,7 @@ Route::group(['prefix' => 'catalog', 'as'=>'catalog.'], function()
 {
   // Route::resource('/', 'CategoryController')->only([
   //   'index', 'show']);
+  Route::get('/search', 'ProductController@textsearch')->name('search');
   Route::get('/', 'CategoryController@index')->name('index');
   Route::get('/{category}', 'CategoryController@show')->name('show');
   Route::get('/{id}/products', 'ProductController@index_category')->name('products_category');
@@ -27,6 +28,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
   Route::get('/products', 'ProductAPIController@index')->name('api.products');
   Route::get('/leftblock', 'LeftAPIController@leftblock')->name('api.leftblock');
   Route::post('/to_basket', 'BasketController@add');
+  Route::get('/textsearch', 'ProductAPIController@textsearch');
 });
 
 

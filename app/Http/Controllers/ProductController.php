@@ -17,36 +17,66 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function textsearch(Request $request)
     {
-        //
+        // $Q = '%'.$q.'%';
+        // $results = Product::where('brand', 'LIKE', $Q)->get();;
+        // $results = $results->merge(Product::where('model', 'LIKE', $Q)->get());
+        // foreach ($results as $r){
+        //   echo $r;
+        // }
+        return view('search.products', [
+          'q'=>$request['q'],
+          'categories' =>Cache::rememberForever('allcategories', function() {
+               return Category::get_all_categories();
+              }),
+        ]);
     }
     public function index_category(Request $request, $id)
     {
-      $basket = $request->user()->basket;
-      return view('catalog.products', [
-        'idkey'=>$id,
-        'categories' =>Cache::rememberForever('allcategories', function() {
-             return Category::get_all_categories();
-            }),
-        'num_in_basket'=> $basket->num_in_basket(),
-        'writeTovar' => $basket->writeTovar(),
-      ]);
-    }
-
-    public function show(Request $request, Product $product)
-    {
+      if ($request->user()->is_admin){
+        return view('catalog.products', [
+          'idkey'=>$id,
+          'categories' =>Cache::rememberForever('allcategories', function() {
+               return Category::get_all_categories();
+              }),
+        ]);
+      }
+      else{
         $basket = $request->user()->basket;
-        return view('catalog.products.show', [
-          'product'=>Product::find($product->id),
+        return view('catalog.products', [
+          'idkey'=>$id,
           'categories' =>Cache::rememberForever('allcategories', function() {
                return Category::get_all_categories();
               }),
           'num_in_basket'=> $basket->num_in_basket(),
           'writeTovar' => $basket->writeTovar(),
         ]);
+      }
     }
 
+    public function show(Request $request, Product $product)
+    {
+        if ($request->user()->is_admin){
+          return view('catalog.products.show', [
+            'product'=>Product::find($product->id),
+            'categories' =>Cache::rememberForever('allcategories', function() {
+                 return Category::get_all_categories();
+                }),
+          ]);
+        }
+        else {
+          $basket = $request->user()->basket;
+          return view('catalog.products.show', [
+            'product'=>Product::find($product->id),
+            'categories' =>Cache::rememberForever('allcategories', function() {
+                 return Category::get_all_categories();
+                }),
+            'num_in_basket'=> $basket->num_in_basket(),
+            'writeTovar'=> $basket->writeTovar(),
+          ]);
+          }
+    }
     public function destroy(Product $product)
     {
         //
