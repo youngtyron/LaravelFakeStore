@@ -1,19 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
+@include('search.form')
 
-      @foreach ($categories as $category)
-        @if(count($category->children)>0)
-          <p><a href="{{route('catalog.show', $category)}}">{{$category->name}}</a></p>
-        @else
-          <p><a href="{{route('catalog.products_category', $category->id)}}">{{$category->name}}</a></p>
-        @endif
-      @endforeach
-
-    </div>
+<div class="links">
+  <table class='products-table'>
+    <p class='no-products' style='display: none;'>Здесь пока нет товаров</p>
+  </table>
 </div>
+
 @endsection
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 

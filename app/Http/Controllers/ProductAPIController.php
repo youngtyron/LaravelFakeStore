@@ -26,7 +26,6 @@ class ProductAPIController extends Controller
       }
     }
     public function textsearch(){
-      // echo Input:: Get('q');
       $lastprice = Input:: Get('price');
       if ($lastprice){
         $q = Input:: Get('q');
@@ -44,5 +43,58 @@ class ProductAPIController extends Controller
         $splice = $results->sortByDesc('price')->splice(0, 12);
         return $splice->toArray();
       }
+    }
+    public function filter(){
+      $input = Input::all();
+      $id = $input['id'];
+      $maxprice = $input['maxprice'];
+      $brands = explode(',', $input['brands']);
+      if (Input::has('lastprice')){
+        $lastprice = $input['lastprice'];
+        $products = Product::where('category_id', $id)->where('price', '<', $maxprice)->orderBy('price', 'DESC')->get();
+      }
+      else{
+        $products = Product::where('category_id', $id)->where('price', '<', $maxprice)->orderBy('price', 'DESC')->get();
+      }
+      if ($brands[0]==''){
+        $filtered = $products;
+      }
+      else{
+        $filtered = collect();
+        foreach($brands as $brand){
+          $brandproducts = $products->where('brand', $brand);
+          foreach($brandproducts as $brandproduct){
+            $filtered->push($brandproduct);
+          }
+        }
+      }
+      $splice = $filtered->splice(0, 12);
+      return $splice->toArray();
+    }
+    public function mainfilter(){
+      $input = Input::all();
+      $maxprice = $input['maxprice'];
+      $brands = explode(',', $input['brands']);
+      if (Input::has('lastprice')){
+        $lastprice = $input['lastprice'];
+        $products = Product::where('price', '<', $maxprice)->orderBy('price', 'DESC')->get();
+      }
+      else{
+        $products = Product::where('price', '<', $maxprice)->orderBy('price', 'DESC')->get();
+      }
+      if ($brands[0]==''){
+        $filtered = $products;
+      }
+      else{
+        $filtered = collect();
+        foreach($brands as $brand){
+          $brandproducts = $products->where('brand', $brand);
+          foreach($brandproducts as $brandproduct){
+            $filtered->push($brandproduct);
+          }
+        }
+      }
+      $splice = $filtered->splice(0, 12);
+      return $splice->toArray();
     }
 }

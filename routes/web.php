@@ -25,10 +25,13 @@ Route::group(['prefix' => 'catalog', 'as'=>'catalog.'], function()
 
 Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
 {
+  Route::get('/maincatalog', 'CategoryAPIController@index');
   Route::get('/products', 'ProductAPIController@index')->name('api.products');
   Route::get('/leftblock', 'LeftAPIController@leftblock')->name('api.leftblock');
   Route::post('/to_basket', 'BasketController@add');
   Route::get('/textsearch', 'ProductAPIController@textsearch');
+  Route::get('/filter', 'ProductAPIController@filter');
+  Route::get('/mainfilter', 'ProductAPIController@mainfilter');
 });
 
 

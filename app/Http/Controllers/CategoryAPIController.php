@@ -4,25 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use App\Product;
+use App\ProductImage;
+use DB;
+use Illuminate\Support\Facades\Input;
 
 class CategoryAPIController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-      $categories = Category::paginate();
-      return $categories->toArray();
+      $lastprice = Input::Get('price');
+      if ($lastprice){
+        $products = Product::where('price', '<', $lastprice)->orderBy('price', 'DESC')->get();
+        $splice = $products->splice(0, 12);
+        return $splice->toArray();
+      }
+      else{
+        $products = Product::orderBy('price', 'DESC')->get();
+        $splice = $products->splice(0, 12);
+        return $splice->toArray();
+      }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //

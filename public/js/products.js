@@ -6,8 +6,92 @@ var price = "<p id='in-work-price' class='product-price'></p>"
 var products = '';
 var array = [];
 
+function FillProductTable(products){
+  if (products != ''){
+    if ($('.products-table-row').last().find('.divbox').length ==0){
+      var counter = 3;
+    }
+    else{
+      var counter = $('.products-table-row').last().find('.divbox').length;
+    }
+    for (var i=0; i<products.length; i++) {
+      product = products[i];
+      if ($.inArray(product.id, array)==-1){
+        array.push(product.id);
+        if (counter < 3){
+          var tablerow  = $('#in-work-table-row');
+          var cell = $('<td>', { class: 'products-table-cell', id: 'in-work-table-cell'}).appendTo(tablerow);
+          cell.append(divbox);
+          $('#in-work-divbox').find('.product-brand').html(product.brand);
+          $('#in-work-divbox').find('.product-model').html(product.model);
+          $('#in-work-divbox').append(image_elem);
+          $('#in-work-divbox').parent().attr('href',  'http://localhost:8000/catalog/product/'+product.id);
+          $('#in-work-image').attr('src', 'http://localhost:8000/' + product.image);
+          $('#in-work-divbox').append(price);
+          $('#in-work-price').html(product.price + 'Р');
+          $('#in-work-price').attr('name', product.price);
+          $('#in-work-price').removeAttr("id");
+          $('#in-work-image').removeAttr("id");
+          $('#in-work-divbox').removeAttr("id");
+          cell.removeAttr("id");
+          counter = counter + 1;
+        }
+        else{
+          $('#in-work-table-row').removeAttr("id");
+          $('.products-table').append(new_table_row);
+          var tablerow  = $('#in-work-table-row');
+          var cell = $('<td>', { class: 'products-table-cell', id: 'in-work-table-cell'}).appendTo(tablerow);
+          cell.append(divbox);
+          $('#in-work-divbox').find('.product-brand').html(product.brand);
+          $('#in-work-divbox').find('.product-model').html(product.model);
+          $('#in-work-divbox').append(image_elem);
+          $('#in-work-divbox').parent().attr('href',  'http://localhost:8000/catalog/product/'+product.id);
+          $('#in-work-image').attr('src', 'http://localhost:8000/' + product.image);
+          $('#in-work-divbox').append(price);
+          $('#in-work-price').html(product.price + 'Р');
+          $('#in-work-price').attr('name', product.price);
+          $('#in-work-price').removeAttr("id");
+          $('#in-work-image').removeAttr("id");
+          $('#in-work-divbox').removeAttr("id");
+          cell.removeAttr("id");
+          counter = 1;
+        };
+      };
+    };
+  }
+  else{
+    if ($('.divbox').length == 0){
+      $('.no-products').show();
+    }
+  }
+}
 
 function ProductsRequest() {
+  if (window.location.search){
+    var maxprice = window.location.search.split('=')[2]
+    var brands = window.location.search.split('=')[1].split('?')[0]
+    brands_arr = brands.split(',');
+    for (i=0; i<brands_arr.length; i++){
+      $('#' + [name=brands_arr[i]]).prop('checked', true);
+    }
+    $('.price-range').prop('value', maxprice);
+    $('.max-price').html(maxprice);
+    var id = parseInt($('#category-id').attr('name'));
+    var lastprice = $('.product-price').last().attr('name');
+    $.ajax({
+      type: 'GET',
+      url: 'http://localhost:8000/api/filter/',
+      data: {'id':id, 'price': lastprice, 'maxprice':maxprice, 'brands': brands},
+      success: function(response){
+        products = response;
+        FillProductTable(products);
+      },
+      error: function(error){
+        console.log(error)
+      }
+    });
+  }
+  else{
     var id = parseInt($('#category-id').attr('name'));
     var lastprice = $('.product-price').last().attr('name');
     $.ajax({
@@ -16,65 +100,10 @@ function ProductsRequest() {
       data: {'id':id, 'price': lastprice},
       success: function(response){
         products = response;
-        if (products != ''){
-          if ($('.products-table-row').last().find('.divbox').length ==0){
-            var counter = 3;
-          }
-          else{
-            var counter = $('.products-table-row').last().find('.divbox').length;
-          }
-          for (var i=0; i<products.length; i++) {
-            product = products[i];
-            if ($.inArray(product.id, array)==-1){
-              array.push(product.id);
-              if (counter < 3){
-                var tablerow  = $('#in-work-table-row');
-                var cell = $('<td>', { class: 'products-table-cell', id: 'in-work-table-cell'}).appendTo(tablerow);
-                cell.append(divbox);
-                $('#in-work-divbox').find('.product-brand').html(product.brand);
-                $('#in-work-divbox').find('.product-model').html(product.model);
-                $('#in-work-divbox').append(image_elem);
-                $('#in-work-divbox').parent().attr('href',  'http://localhost:8000/catalog/product/'+product.id);
-                $('#in-work-image').attr('src', 'http://localhost:8000/' + product.image);
-                $('#in-work-divbox').append(price);
-                $('#in-work-price').html(product.price + 'Р');
-                $('#in-work-price').attr('name', product.price);
-                $('#in-work-price').removeAttr("id");
-                $('#in-work-image').removeAttr("id");
-                $('#in-work-divbox').removeAttr("id");
-                cell.removeAttr("id");
-                counter = counter + 1;
-              }
-              else{
-                $('#in-work-table-row').removeAttr("id");
-                $('.products-table').append(new_table_row);
-                var tablerow  = $('#in-work-table-row');
-                var cell = $('<td>', { class: 'products-table-cell', id: 'in-work-table-cell'}).appendTo(tablerow);
-                cell.append(divbox);
-                $('#in-work-divbox').find('.product-brand').html(product.brand);
-                $('#in-work-divbox').find('.product-model').html(product.model);
-                $('#in-work-divbox').append(image_elem);
-                $('#in-work-divbox').parent().attr('href',  'http://localhost:8000/catalog/product/'+product.id);
-                $('#in-work-image').attr('src', 'http://localhost:8000/' + product.image);
-                $('#in-work-divbox').append(price);
-                $('#in-work-price').html(product.price + 'Р');
-                $('#in-work-price').attr('name', product.price);
-                $('#in-work-price').removeAttr("id");
-                $('#in-work-image').removeAttr("id");
-                $('#in-work-divbox').removeAttr("id");
-                cell.removeAttr("id");
-                counter = 1;
-              };
-            };
-          };
-        }
-        else{
-          if ($('.divbox').length == 0){
-            $('.no-products').show();
-          }
-        }
+        FillProductTable(products);
       },
     });
+  }
 }
 
 $(document).ready(ProductsRequest);

@@ -8,23 +8,13 @@ use App\Basket;
 use App\ProductImage;
 use Illuminate\Http\Request;
 use \Cache;
+use DB;
+use Illuminate\Support\Facades\Input;
 
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function textsearch(Request $request)
-    {
-        // $Q = '%'.$q.'%';
-        // $results = Product::where('brand', 'LIKE', $Q)->get();;
-        // $results = $results->merge(Product::where('model', 'LIKE', $Q)->get());
-        // foreach ($results as $r){
-        //   echo $r;
-        // }
+    public function textsearch(Request $request){
         return view('search.products', [
           'q'=>$request['q'],
           'categories' =>Cache::rememberForever('allcategories', function() {
@@ -32,14 +22,18 @@ class ProductController extends Controller
               }),
         ]);
     }
-    public function index_category(Request $request, $id)
-    {
+    public function index_category(Request $request, $id){
+
       if ($request->user()->is_admin){
         return view('catalog.products', [
+          'max'=>$max = Product::where('category_id', $id)->max('price'),
+          'min'=>$max = Product::where('category_id', $id)->min('price'),
           'idkey'=>$id,
           'categories' =>Cache::rememberForever('allcategories', function() {
                return Category::get_all_categories();
               }),
+          'brands' => array_unique(Product::where('category_id', $id)->pluck('brand')->toArray()),
+
         ]);
       }
       else{
@@ -51,6 +45,7 @@ class ProductController extends Controller
               }),
           'num_in_basket'=> $basket->num_in_basket(),
           'writeTovar' => $basket->writeTovar(),
+          'brands' => array_unique(Product::where('category_id', $id)->pluck('brand')->toArray()),
         ]);
       }
     }
