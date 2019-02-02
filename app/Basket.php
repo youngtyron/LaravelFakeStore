@@ -3,12 +3,27 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Eloquent;
 
+
+/**
+ * Basket
+ *
+ * @mixin Eloquent
+ * @property int $id
+ * @property int $user_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Product[] $products
+ * @property-read \App\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Basket newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Basket newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Basket query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Basket whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Basket whereUserId($value)
+ */
 class Basket extends Model
 {
   protected $fillable = ['user_id'];
   public $timestamps = false;
-
 
   public function user()
   {
@@ -32,7 +47,7 @@ class Basket extends Model
       return 0;
     }
   }
-  public function sum(){
+  public function count_sum(){
     $sum = 0;
     foreach ($this->products()->get() as $product){
       $sum = $sum + $product->price;

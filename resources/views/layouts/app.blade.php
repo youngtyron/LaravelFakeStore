@@ -88,8 +88,7 @@
           <div class="row app-row">
             @if (Auth::check())
               <div class="col-xs-4 col-sm-2 app-col leftpanel">
-                @include('catalog.leftblock.leftpanel')
-                @include('catalog.leftblock.searchgroup')
+                @yield('left')
               </div>
             @endif
             <div class="col-xs-12 col-sm-8 app-col">

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use \Cache;
 use DB;
 use Illuminate\Support\Facades\Input;
-
+use Redirect;
 
 class ProductController extends Controller
 {
@@ -23,7 +23,6 @@ class ProductController extends Controller
         ]);
     }
     public function index_category(Request $request, $id){
-
       if ($request->user()->is_admin){
         return view('catalog.products', [
           'max'=>$max = Product::where('category_id', $id)->max('price'),
@@ -74,7 +73,8 @@ class ProductController extends Controller
     }
     public function destroy(Product $product)
     {
-        //
+       $product->delete();
+       return Redirect::to('/catalog');
     }
     public function edit(Product $product)
     {

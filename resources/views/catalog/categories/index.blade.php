@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('left')
+  @include('catalog.leftblock.leftpanel')
+  @include('catalog.leftblock.searchgroup')
+@endsection
+
 @section('content')
 @include('search.form')
 

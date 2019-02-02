@@ -19,6 +19,12 @@
 
       @if (Auth::user()->is_admin)
         <a class="btn btn-info" href="{{route ('catalog.product.edit', $product->id)}}">Редактировать</a>
+        <form action="{{route ('catalog.product.delete', $product)}}" method="post">
+          {{ csrf_field() }}
+          {{ method_field('DELETE') }}
+          <button type="submit" class="btn btn-info"
+                  onClick="return window.confirm('Удалить товар из каталога? Отменить это действие будет невозможно.');">Удалить</button>
+        </form>
       @else
         <button type="button" class="btn btn-warning buy-button">В корзину</button>
       @endif

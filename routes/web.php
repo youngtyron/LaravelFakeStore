@@ -18,6 +18,7 @@ Route::group(['prefix' => 'catalog', 'as'=>'catalog.'], function()
   Route::get('/{category}', 'CategoryController@show')->name('show');
   Route::get('/{id}/products', 'ProductController@index_category')->name('products_category');
   Route::get('/product/{product}', 'ProductController@show')->name('product.show');
+  Route::delete('/product/{product}/delete', 'ProductController@destroy')->name('product.delete');
   Route::get('/product/{product}/edit', 'ProductController@edit')->name('product.edit');
   Route::put('/product/{product}/update', 'ProductController@update')->name('product.update');
 });
@@ -40,7 +41,10 @@ Route::resource('/api_catalog', 'CategoryAPIController');
 Route::group(['prefix' => 'basket', 'as'=>'basket.'], function()
 {
   Route::get('/', 'BasketController@show')->name('show');
+  Route::post('/order', 'BookingController@store')->name('order');
 });
+
+
 
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
@@ -52,5 +56,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
   Route::put('/categories/{category}/update', 'Admin\AdminController@update_category')->name('admin.category.update');
   Route::get('/products/create', 'Admin\AdminController@create_product')->name('admin.product.create');
   Route::post('/products/store', 'Admin\AdminController@store_product')->name('admin.product.store');
+  Route::get('/bookings', 'BookingController@index')->name('admin.bookings.index');
   // Route::resource('/products', 'ProductController', ['as'=>'admin']);
 });

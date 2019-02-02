@@ -30,7 +30,6 @@ class CategoryController extends Controller
           'writeTovar' => $basket->writeTovar(),
           'categories'=>Category::with('children')->where('parent_id','0')->get(),
           'brands' => array_unique(DB::table('products')->pluck('brand')->toArray()),
-
         ]);
       }
 

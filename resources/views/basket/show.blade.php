@@ -13,8 +13,12 @@
     @endforelse
   </ul>
 
-  <p>Итого:{{$basket->sum()}} р.</p>
+  <p>Итого:{{$basket->count_sum()}} р.</p>
 
+  <form action="{{ route ('basket.order')}}" method="post">
+    {{ csrf_field() }}
+    <button type="submit" class="btn btn-info">Оформить заказ</button>
+  </form>
 
 @endsection
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
