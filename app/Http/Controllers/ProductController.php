@@ -25,8 +25,8 @@ class ProductController extends Controller
     public function index_category(Request $request, $id){
       if ($request->user()->is_admin){
         return view('catalog.products', [
-          'max'=>$max = Product::where('category_id', $id)->max('price'),
-          'min'=>$max = Product::where('category_id', $id)->min('price'),
+          'max'=>(Product::where('category_id', $id)->max('price'))+5000,
+          'min'=>Product::where('category_id', $id)->min('price'),
           'idkey'=>$id,
           'categories' =>Cache::rememberForever('allcategories', function() {
                return Category::get_all_categories();
@@ -38,8 +38,8 @@ class ProductController extends Controller
       else{
         $basket = $request->user()->basket;
         return view('catalog.products', [
-          'max'=>$max = Product::where('category_id', $id)->max('price'),
-          'min'=>$max = Product::where('category_id', $id)->min('price'),
+          'max'=>(Product::where('category_id', $id)->max('price'))+5000,
+          'min'=>Product::where('category_id', $id)->min('price'),
           'idkey'=>$id,
           'categories' =>Cache::rememberForever('allcategories', function() {
                return Category::get_all_categories();

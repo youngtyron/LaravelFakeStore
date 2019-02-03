@@ -49,14 +49,14 @@ class ProductAPIController extends Controller
       $id = $input['id'];
       $maxprice = $input['maxprice'];
       $brands = explode(',', $input['brands']);
-      if (Input::has('lastprice')){
-        $lastprice = $input['lastprice'];
-        $products = Product::where('category_id', $id)->where('price', '<', $maxprice)->orderBy('price', 'DESC')->get();
+      if (Input::has('price')){
+        $lastprice = $input['price'];
+        $products = Product::where('category_id', $id)->where('price', '<', $lastprice)->orderBy('price', 'DESC')->get();
       }
       else{
-        $products = Product::where('category_id', $id)->where('price', '<', $maxprice)->orderBy('price', 'DESC')->get();
+        $products = Product::where('category_id', $id)->where('price', '<=', $maxprice)->orderBy('price', 'DESC')->get();
       }
-      if ($brands[0]==''){
+      if ($brands[0] == '0'){
         $filtered = $products;
       }
       else{
@@ -75,14 +75,14 @@ class ProductAPIController extends Controller
       $input = Input::all();
       $maxprice = $input['maxprice'];
       $brands = explode(',', $input['brands']);
-      if (Input::has('lastprice')){
-        $lastprice = $input['lastprice'];
-        $products = Product::where('price', '<', $maxprice)->orderBy('price', 'DESC')->get();
+      if (Input::has('price')){
+        $lastprice = $input['price'];
+        $products = Product::where('price', '<', $lastprice)->orderBy('price', 'DESC')->get();
       }
       else{
-        $products = Product::where('price', '<', $maxprice)->orderBy('price', 'DESC')->get();
+        $products = Product::where('price', '<=', $maxprice)->orderBy('price', 'DESC')->get();
       }
-      if ($brands[0]==''){
+      if ($brands[0] == '0'){
         $filtered = $products;
       }
       else{

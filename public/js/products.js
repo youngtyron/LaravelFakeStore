@@ -86,9 +86,6 @@ function ProductsRequest() {
         products = response;
         FillProductTable(products);
       },
-      error: function(error){
-        console.log(error)
-      }
     });
   }
   else{

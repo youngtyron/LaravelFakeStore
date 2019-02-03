@@ -70,6 +70,12 @@ function MainCatalogRequest() {
   if (window.location.search){
     var maxprice = window.location.search.split('=')[2]
     var brands = window.location.search.split('=')[1].split('?')[0]
+    brands_arr = brands.split(',');
+    for (i=0; i<brands_arr.length; i++){
+      $('#' + [name=brands_arr[i]]).prop('checked', true);
+    }
+    $('.price-range').prop('value', maxprice);
+    $('.max-price').html(maxprice);
     var lastprice = $('.product-price').last().attr('name');
     $.ajax({
       type: 'GET',

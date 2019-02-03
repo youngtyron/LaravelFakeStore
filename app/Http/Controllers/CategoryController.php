@@ -14,8 +14,8 @@ class CategoryController extends Controller
     {
       if ($request->user()->is_admin){
         return view('catalog.categories.index', [
-          'max'=>$max = Product::max('price'),
-          'min'=>$max = Product::min('price'),
+          'max'=>(Product::max('price'))+5000,
+          'min'=>Product::min('price'),
           'categories'=>Category::with('children')->where('parent_id','0')->get(),
           'brands' => array_unique(DB::table('products')->pluck('brand')->toArray()),
 
@@ -24,8 +24,8 @@ class CategoryController extends Controller
       else{
         $basket = $request->user()->basket;
         return view('catalog.categories.index', [
-          'max'=>$max = Product::max('price'),
-          'min'=>$max = Product::min('price'),
+          'max'=>(Product::max('price'))+5000,
+          'min'=>Product::min('price'),
           'num_in_basket'=> $basket->num_in_basket(),
           'writeTovar' => $basket->writeTovar(),
           'categories'=>Category::with('children')->where('parent_id','0')->get(),
