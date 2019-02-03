@@ -38,6 +38,8 @@ class ProductController extends Controller
       else{
         $basket = $request->user()->basket;
         return view('catalog.products', [
+          'max'=>$max = Product::where('category_id', $id)->max('price'),
+          'min'=>$max = Product::where('category_id', $id)->min('price'),
           'idkey'=>$id,
           'categories' =>Cache::rememberForever('allcategories', function() {
                return Category::get_all_categories();

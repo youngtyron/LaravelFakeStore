@@ -6,6 +6,7 @@ function SearchRequest(){
       input_array.push($(inputs[i]).val())
     }
   }
+  console.log(input_array)
   var maxprice = $('.price-range').val();
   var url = '?brand=' + input_array + '?max=' + maxprice;
   window.location = url;

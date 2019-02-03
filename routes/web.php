@@ -33,6 +33,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'cors'], function()
   Route::get('/textsearch', 'ProductAPIController@textsearch');
   Route::get('/filter', 'ProductAPIController@filter');
   Route::get('/mainfilter', 'ProductAPIController@mainfilter');
+  Route::delete('/delete_from_basket', 'BasketController@delete');
 });
 
 

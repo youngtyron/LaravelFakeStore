@@ -1,6 +1,6 @@
 <div class="left-catalog-box">
   <ul class="list-group left-catalog-group">
-    <li class="list-group-item active left-catalog-title">Каталог</li>
+    <li class="list-group-item left-catalog-title">Каталог</li>
       @foreach ($categories as $category)
         @if ($category->parent_id==0)
           @if ($category->is_last==0)

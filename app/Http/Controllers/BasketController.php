@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Basket;
 use App\Product;
 use App\Category;
+use DB;
 use \Cache;
 use Illuminate\Http\Request;
 
@@ -33,5 +34,10 @@ class BasketController extends Controller
              return Category::get_all_categories();
             }),
       ]);
+    }
+    public function delete(Request $request){
+      $basket = auth()->user()->basket()->first();
+      DB::table('basket_product')->where('basket_id', $basket->id)->where('product_id', $request['id'])->take(1)->delete();
+      return response(200);
     }
 }

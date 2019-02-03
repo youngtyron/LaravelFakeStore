@@ -108,3 +108,8 @@
 .search-form{
   text-align: center;
 }
+.delete-from-basket{
+  opacity: 0.4;
+  float: right;
+  margin-top: 20px;
+}
